@@ -1,25 +1,30 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace EightyNine\FilamentPasswordExpiry;
 
+use EightyNine\FilamentPasswordExpiry\Http\Middleware\PasswordExpiryMiddleware;
 use Filament\Contracts\Plugin;
+use Filament\Facades\Filament;
 use Filament\Panel;
+use Illuminate\Support\Facades\Route;
 
-class SkeletonPlugin implements Plugin
+class PasswordExpiryPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'skeleton';
+        return 'password-expiry';
     }
 
     public function register(Panel $panel): void
     {
-        //
+        $panel->middleware([
+            PasswordExpiryMiddleware::class
+        ]);
     }
 
     public function boot(Panel $panel): void
-    {
-        //
+    {        
+        Route::redirect('/login', Filament::getLoginUrl())->name('login');
     }
 
     public static function make(): static

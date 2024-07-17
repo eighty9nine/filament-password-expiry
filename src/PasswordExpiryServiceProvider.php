@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace EightyNine\FilamentPasswordExpiry;
 
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
@@ -13,14 +13,18 @@ use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
-use VendorName\Skeleton\Testing\TestsSkeleton;
+use EightyNine\FilamentPasswordExpiry\Commands\FilamentPasswordExpiryCommand;
+use EightyNine\FilamentPasswordExpiry\Pages\ResetPassword;
+use EightyNine\FilamentPasswordExpiry\Testing\TestsFilamentPasswordExpiry;
+use Filament\Facades\Filament;
+use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class PasswordExpiryServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'skeleton';
+    public static string $name = 'password-expiry';
 
-    public static string $viewNamespace = 'skeleton';
+    public static string $viewNamespace = 'password-expiry';
 
     public function configurePackage(Package $package): void
     {
@@ -36,8 +40,9 @@ class SkeletonServiceProvider extends PackageServiceProvider
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub(':vendor_slug/:package_slug');
-            });
+                    ->askToStarRepoOnGitHub('eightynine/password-expiry');
+            })
+            ->hasRoutes($this->getRoutes());
 
         $configFileName = $package->shortName();
 
@@ -82,18 +87,20 @@ class SkeletonServiceProvider extends PackageServiceProvider
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
                 $this->publishes([
-                    $file->getRealPath() => base_path("stubs/skeleton/{$file->getFilename()}"),
-                ], 'skeleton-stubs');
+                    $file->getRealPath() => base_path("stubs/filament-password-expiry/{$file->getFilename()}"),
+                ], 'filament-password-expiry-stubs');
             }
         }
 
         // Testing
-        Testable::mixin(new TestsSkeleton());
+        Testable::mixin(new TestsFilamentPasswordExpiry());
+
+        Livewire::component('eighty-nine.filament-password-expiry.pages.reset-password', ResetPassword::class);
     }
 
     protected function getAssetPackageName(): ?string
     {
-        return ':vendor_slug/:package_slug';
+        return 'eightynine/filament-password-expiry';
     }
 
     /**
@@ -102,9 +109,9 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('skeleton', __DIR__ . '/../resources/dist/components/skeleton.js'),
-            Css::make('skeleton-styles', __DIR__ . '/../resources/dist/skeleton.css'),
-            Js::make('skeleton-scripts', __DIR__ . '/../resources/dist/skeleton.js'),
+            // AlpineComponent::make('filament-password-expiry', __DIR__ . '/../resources/dist/components/filament-password-expiry.js'),
+            Css::make('filament-password-expiry-styles', __DIR__ . '/../resources/dist/filament-password-expiry.css'),
+            Js::make('filament-password-expiry-scripts', __DIR__ . '/../resources/dist/filament-password-expiry.js'),
         ];
     }
 
@@ -114,7 +121,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            SkeletonCommand::class,
+            FilamentPasswordExpiryCommand::class,
         ];
     }
 
@@ -131,7 +138,9 @@ class SkeletonServiceProvider extends PackageServiceProvider
      */
     protected function getRoutes(): array
     {
-        return [];
+        return [
+            '/../routes/web',
+        ];
     }
 
     /**
@@ -148,7 +157,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_skeleton_table',
+            'add_password_expiry_column_to_table',
         ];
     }
 }

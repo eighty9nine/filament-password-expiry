@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace EightyNine\FilamentPasswordExpiry\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FilamentPasswordExpiryCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-password-expiry';
 
     public $description = 'My command';
 
