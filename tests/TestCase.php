@@ -17,6 +17,7 @@ use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 use EightyNine\FilamentPasswordExpiry\FilamentPasswordExpiryServiceProvider;
+use EightyNine\FilamentPasswordExpiry\PasswordExpiryServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -44,7 +45,7 @@ class TestCase extends Orchestra
             SupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
-            FilamentPasswordExpiryServiceProvider::class,
+            PasswordExpiryServiceProvider::class,
         ];
     }
 
