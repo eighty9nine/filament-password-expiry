@@ -25,7 +25,9 @@ Route::name('filament.')
             }
         }
     });
-Route::name('login')
-    ->get('/login', function(){
-        return redirect()->to(config('password-expiry.after_password_reset_redirect')?: Filament::getLoginUrl());
-    });
+if(config("password-expiry.override_login_route")){
+    Route::name('login')
+        ->get('/login', function(){
+            return redirect()->to(config('password-expiry.after_password_reset_redirect')?: Filament::getLoginUrl());
+        });
+}

@@ -5,7 +5,7 @@ use EightyNine\FilamentPasswordExpiry\Pages\ResetPassword;
 use Filament\Facades\Filament;
 
 return [
-
+    
     /**
      * Table
      * 
@@ -32,7 +32,7 @@ return [
      * 
      * The number of days before the password expires.
      */
-    'expires_in' => 1,
+    'expires_in' => 30,
 
     /**
      * Password expiry route
@@ -83,5 +83,13 @@ return [
      * The route to redirect to after a password reset. By default, the user will be redirected to the login page
      * using "Filament::getLoginUrl()"
      */
-    'after_password_reset_redirect' => null
+    'after_password_reset_redirect' => null,
+
+    /**
+     * Override login route
+     * 
+     * There is a bug in laravel where when you change password, the user is redirected to the login page by default. This override 
+     * fixes that bug by defining a login route that redirects to your panel's login page.
+     */
+    'override_login_route' => true
 ];
