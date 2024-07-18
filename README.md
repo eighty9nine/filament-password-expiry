@@ -1,4 +1,6 @@
-# Allow your users to periodically reset their passwords, to enforce security.
+# Filament Password Expiry
+
+## Allow your users to periodically reset their passwords, to enforce security.
 
 This package allows you to periodically reset your users passwords, to enforce security. In your system you have to force users to change their passwords every 30-90 days. This ensures that even if the user is no longer using the system, other people will not be able to login with their old password.
 
