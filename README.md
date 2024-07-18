@@ -40,6 +40,7 @@ class User extends Authenticatable
     use HasPasswordExpiry;
     ...
 }
+```
 
 You are all good to go! Now when a user is created, the password_expires_at column will be updated with the current date and time plus the expires_in config value. When the user tries to login, the middleware will check if the password_expires_at column is less than the current date and time. If it is, the user will be redirected to the password expiry page.
 
