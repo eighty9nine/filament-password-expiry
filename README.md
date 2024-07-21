@@ -1,5 +1,11 @@
 # Filament Password Expiry
 
+
+## 🛠️ Be Part of the Journey
+
+Hi, I'm Eighty Nine. I created password expiry plugin to solve real problems I faced as a developer. Your sponsorship will allow me to dedicate more time to enhancing these tools and helping more people. [Become a sponsor](https://github.com/sponsors/eighty9nine) and join me in making a positive impact on the developer community.
+
+
 ## Allow your users to periodically reset their passwords, to enforce security.
 
 This package allows you to periodically reset your users passwords, to enforce security. In your system you have to force users to change their passwords every 30-90 days. This ensures that even if the user is no longer using the system, other people will not be able to login with their old password.
