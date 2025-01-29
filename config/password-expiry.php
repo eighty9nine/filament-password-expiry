@@ -91,5 +91,10 @@ return [
      * There is a bug in laravel where when you change password, the user is redirected to the login page by default. This override 
      * fixes that bug by defining a login route that redirects to your panel's login page.
      */
-    'override_login_route' => true
+    'override_login_route' => true,
+
+    /**
+     * Change password after first login
+     */
+    'change_password_first_login' => false,
 ];

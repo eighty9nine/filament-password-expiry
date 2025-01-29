@@ -19,7 +19,8 @@ trait HasPasswordExpiry
 
         static::creating(function ($model) {
             if (
-                filled($model->{config('password-expiry.password_column_name')})
+                filled($model->{config('password-expiry.password_column_name')}) &&
+                !config('password-expiry.change_password_first_login')
             ) {
                 $model->{config('password-expiry.column_name')} = now()->addDays(config('password-expiry.expires_in'));
             }
